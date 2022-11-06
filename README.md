@@ -10,7 +10,9 @@ Deploy với Elastic Beanstalk ECS
 
 2. Rule of engagement:
 - Tận dụng và setup database production ở `config/database.yml` luôn. Không làm theo các hướng dẫn có phải xoá database.yml
+- Cố gắng theo mô hình ở trong link qiita này: https://qiita.com/kota-shidara/items/665fa02f360d42ff8435
 3. Link tham khảo:
 - https://www.codewithjason.com/deploy-ruby-rails-application-aws-elastic-beanstalk/
 - https://www.engineyard.com/blog/running-rails-in-aws-elastic-beanstalk-tutorial/
 - https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
+- https://qiita.com/kota-shidara/items/665fa02f360d42ff8435
