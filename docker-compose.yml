@@ -14,10 +14,27 @@ services:
     volumes:
       - .:/container-ruby-sample
       - bundle:/usr/local/bundle
+      - public-data:/container-ruby-sample/public
+      - tmp-data:/container-ruby-sample/tmp
+      - log-data:/container-ruby-sample/log
     ports:
       - "3000:3000"
     depends_on:
       - db
 
+  server:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/container-ruby-sample/public
+      - tmp-data:/container-ruby-sample/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
 volumes:
   bundle:
+  public-data:
+  tmp-data:
+  log-data:

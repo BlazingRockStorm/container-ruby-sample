@@ -8,4 +8,3 @@ WORKDIR /container-ruby-sample
 COPY Gemfile /container-ruby-sample/Gemfile
 COPY Gemfile.lock /container-ruby-sample/Gemfile.lock
 RUN bundle install
-RUN mkdir -p tmp/sockets
