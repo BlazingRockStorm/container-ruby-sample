@@ -1,0 +1,64 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "container-ruby-sample",
+      "host": {
+        "sourcePath": "/var/app/current/container-ruby-sample"
+      }
+    },
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/proxy/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "container-ruby-sample",
+      "image": "ruby:3.1.2",
+      "essential": true,
+      "memory": 2000,
+      "command": ["bundle","exec","puma","-C","config/puma.rb"],
+      "mountPoints": [
+        {
+          "sourceVolume": "container-ruby-sample",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "nginx-proxy",
+      "image": "nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "container-ruby-sample"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "container-ruby-sample",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/var/log/nginx"
+        }
+      ]
+    }
+  ]
+}
